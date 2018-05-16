@@ -1,0 +1,23 @@
+# system/hidden files
+*~
+.DS_Store
+.svn
+.cvs
+*.bak
+*.swp
+Thumbs.db
+.DS_Store
+.idea
+.htaccess
+index.php
+wp-config.php
+wp-cli.yml
+
+
+# project specific
+content/plugins/wp-xhprof-profiler/
+content/plugins/smr-wp-export-store/csv/
+content/
+pick-n-pull/
+local-config.php
+
