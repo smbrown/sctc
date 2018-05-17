@@ -8,16 +8,10 @@
 Thumbs.db
 .DS_Store
 .idea
-.htaccess
-index.php
-wp-config.php
-wp-cli.yml
+.todo
 
 
 # project specific
-content/plugins/wp-xhprof-profiler/
-content/plugins/smr-wp-export-store/csv/
 content/
 pick-n-pull/
 local-config.php
-
