@@ -12,6 +12,8 @@ Thumbs.db
 
 
 # project specific
-content/
+content/uploads/*
 pick-n-pull/
 local-config.php
+wp/.gitignore
+wp/wordfence-waf.php
