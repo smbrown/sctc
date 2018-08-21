@@ -154,9 +154,11 @@
 		if ( 'none' == self.options.header_style && ! jQuery( 'body' ).hasClass( 'ast-sticky-toggled-off' ) ) {
 			var stick_upto_scroll = selector.offset().top || 0;
 		}else{
-			var masthead 			= $('#masthead');
-			var masthead_bottom 	= masthead.offset().top + masthead.outerHeight() + 100;
-			var stick_upto_scroll 	= masthead_bottom || 0;
+			if ( $('#masthead').length ) {
+				var masthead 			= $('#masthead');
+				var masthead_bottom 	= masthead.offset().top + masthead.outerHeight() + 100;
+				var stick_upto_scroll 	= masthead_bottom || 0;
+			}
 		}
 
 		/**

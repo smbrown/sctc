@@ -45,13 +45,13 @@ if ( ! class_exists( 'Give_Donation_Receipt_Email' ) ) :
 				'form_metabox_setting' => true,
 				'recipient_group_name' => __( 'Donor', 'give' ),
 				'default_email_subject' => esc_attr__( 'Donation Receipt', 'give' ),
-				'default_email_message' => give_get_default_donation_receipt_email()
+				'default_email_message' => give_get_default_donation_receipt_email(),
+				'default_email_header'  => __( 'Donation Receipt', 'give' ),
 			) );
 
 			add_action( "give_{$this->config['id']}_email_notification", array( $this, 'send_donation_receipt' ) );
 			add_action( 'give_email_links', array( $this, 'resend_donation_receipt' ) );
 		}
-
 
 		/**
 		 * Get email subject.
@@ -238,7 +238,7 @@ if ( ! class_exists( 'Give_Donation_Receipt_Email' ) ) :
 
 			Give()->emails->__set( 'from_name', $from_name );
 			Give()->emails->__set( 'from_email', $from_email );
-			Give()->emails->__set( 'heading', esc_html__( 'Donation Receipt', 'give' ) );
+			Give()->emails->__set( 'heading', $this->get_email_header() );
 
 			/**
 			 * Filters the donation receipt's email headers.
@@ -284,7 +284,7 @@ if ( ! class_exists( 'Give_Donation_Receipt_Email' ) ) :
 		 * @since  2.0
 		 * @access public
 		 *
-		 * @param array $data
+		 * @param array $data Donation details.
 		 */
 		public function resend_donation_receipt( $data ) {
 			$purchase_id = absint( $data['purchase_id'] );
@@ -311,9 +311,9 @@ if ( ! class_exists( 'Give_Donation_Receipt_Email' ) ) :
 			) );
 
 			wp_redirect( add_query_arg( array(
-				'give-message' => 'email_sent',
-				'give-action'  => false,
-				'purchase_id'  => false,
+				'give-messages[]' => 'email-sent',
+				'give-action'     => false,
+				'purchase_id'     => false,
 			) ) );
 			exit;
 		}

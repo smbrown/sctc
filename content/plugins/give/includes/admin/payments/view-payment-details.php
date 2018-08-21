@@ -241,22 +241,21 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 									<div id="major-publishing-actions">
 										<div id="publishing-action">
 
-											<input type="submit" class="button button-primary right"
-											       value="<?php _e( 'Save Donation', 'give' ); ?>"/>
-
+											<input type="submit" class="button button-primary right" value="<?php esc_attr_e( 'Save Donation', 'give' ); ?>"/>
 											<?php
 											if ( give_is_payment_complete( $payment_id ) ) {
+												$url = add_query_arg(
+													array(
+														'give-action' => 'email_links',
+														'purchase_id' => $payment_id,
+													),
+													admin_url( 'edit.php?post_type=give_forms&page=give-payment-history&view=view-payment-details&id=' . $payment_id )
+												);
+
 												echo sprintf(
 													'<a href="%1$s" id="give-resend-receipt" class="button-secondary right">%2$s</a>',
-													esc_url(
-														add_query_arg(
-															array(
-																'give-action' => 'email_links',
-																'purchase_id' => $payment_id,
-															)
-														)
-													),
-													__( 'Resend Receipt', 'give' )
+													esc_url( $url ),
+													esc_html__( 'Resend Receipt', 'give' )
 												);
 											}
 											?>
@@ -323,10 +322,10 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 										</div>
 
 										<?php
-                                        // Display the transaction ID present.
-                                        // The transaction ID is the charge ID from the gateway.
-                                        // For instance, stripe "ch_BzvwYCchqOy5Nt".
-                                        if ( $transaction_id != $payment_id ) : ?>
+										// Display the transaction ID present.
+										// The transaction ID is the charge ID from the gateway.
+										// For instance, stripe "ch_BzvwYCchqOy5Nt".
+										if ( $transaction_id != $payment_id ) : ?>
 											<div class="give-order-tx-id give-admin-box-inside">
 												<p>
 													<strong><?php _e( 'Transaction ID:', 'give' ); ?> <span class="give-tooltip give-icon give-icon-question"  data-tooltip="<?php echo sprintf( esc_attr__( 'The transaction ID within %s.', 'give' ), $gateway); ?>"></span></strong>&nbsp;

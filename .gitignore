@@ -17,5 +17,6 @@ pick-n-pull/
 local-config.php
 wp/.gitignore
 wp/wordfence-waf.php
+content/wflogs*
 content/wflogs/*
 content/advanced-cache.php

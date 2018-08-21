@@ -1488,9 +1488,11 @@ function bsf_envato_redirect_url_callback() {
 
 	$form_data = array();
 
-	$form_data['product_id'] 	= isset( $_GET['product_id'] ) ? esc_attr( $_GET['product_id'] ) : '';
-	$form_data['url'] 			= isset( $_GET['url'] ) ? esc_url_raw( $_GET['url'] ) : '';
-	$form_data['redirect'] 		= isset( $_GET['redirect'] ) ? rawurlencode( $_GET['redirect'] ) : '';
+	$form_data['product_id'] 				= isset( $_GET['product_id'] ) ? esc_attr( $_GET['product_id'] ) : '';
+	$form_data['url'] 						= isset( $_GET['url'] ) ? esc_url_raw( $_GET['url'] ) : '';
+	$form_data['redirect'] 					= isset( $_GET['redirect'] ) ? rawurlencode( $_GET['redirect'] ) : '';
+	$form_data['privacy_consent'] 			= ( isset( $_GET['privacy_consent'] ) && 'true' === $_GET['privacy_consent'] ) ? true : false;
+	$form_data['terms_conditions_consent'] 	= ( isset( $_GET['terms_conditions_consent'] ) && 'true' === $_GET['terms_conditions_consent'] ) ? true : false;
 
 	$url = $envato_activate->envato_activation_url( $form_data );
 

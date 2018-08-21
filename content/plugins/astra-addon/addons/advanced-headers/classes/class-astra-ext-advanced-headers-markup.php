@@ -49,7 +49,7 @@ if ( ! class_exists( 'Astra_Ext_Advanced_Headers_Markup' ) ) {
 			// Advanced Header with Merge header action.
 			add_action( 'astra_header_before', array( $this, 'advanced_header_merged' ) );
 			// Advanced Headers action.
-			add_action( 'astra_content_before', array( $this, 'load_markup' ), 1 );
+			add_action( 'astra_header_after', array( $this, 'load_markup' ), 0 );
 			add_filter( 'wp_nav_menu_args', array( $this, 'custom_primary_menu' ) );
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'add_scripts' ), 9 );

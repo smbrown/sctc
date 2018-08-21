@@ -72,6 +72,7 @@ if ( ! class_exists( 'Astra_Ext_Blog_Pro_Loader' ) ) {
 
 			// Single.
 			$defaults['ast-author-info']               = false;
+			$defaults['ast-single-post-navigation']    = false;
 			$defaults['ast-auto-prev-post']            = false;
 			$defaults['single-featured-image-padding'] = false;
 

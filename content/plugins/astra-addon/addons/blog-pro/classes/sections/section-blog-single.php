@@ -51,6 +51,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	);
 
 	/**
+	 * Option: Disable Single Post Navigation
+	 */
+	$wp_customize->add_setting(
+		ASTRA_THEME_SETTINGS . '[ast-single-post-navigation]', array(
+			'default'           => astra_get_option( 'ast-single-post-navigation' ),
+			'type'              => 'option',
+			'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_checkbox' ),
+		)
+	);
+	$wp_customize->add_control(
+		ASTRA_THEME_SETTINGS . '[ast-single-post-navigation]', array(
+			'section' => 'section-blog-single',
+			'label'   => __( 'Disable Single Post Navigation', 'astra-addon' ),
+			'type'    => 'checkbox',
+		)
+	);
+
+	/**
 	 * Option: Autoposts
 	 */
 	$wp_customize->add_setting(

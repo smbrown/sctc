@@ -345,7 +345,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-post' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
+					'{{WRAPPER}} .elementor-post,{{WRAPPER}} .elementor-posts-nothing-found' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
 					'{{WRAPPER}} .elementor-posts-container' => 'margin-left: calc( -{{SIZE}}{{UNIT}}/2 ); margin-right: calc( -{{SIZE}}{{UNIT}}/2 );',
 				],
 			]

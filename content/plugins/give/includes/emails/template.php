@@ -133,7 +133,7 @@ function give_email_preview_buttons_callback( $field ) {
 				add_query_arg( array(
 			'give_action'  => 'send_preview_email',
 			'email_type' => $field_id,
-			'give-message' => 'sent-test-email',
+			'give-messages[]' => 'sent-test-email',
 		) ), 'give-send-preview-email' ),
 		esc_attr__( 'Send Test Email.', 'give' ),
 		esc_html__( 'Send Test Email', 'give' )
@@ -162,22 +162,28 @@ function give_get_preview_email_header() {
 	}
 
 	//Get payments.
-	$payments = new Give_Payments_Query( array(
+	$donations = new Give_Payments_Query( array(
 		'number' => 100,
+		'output' => '',
+		'fields' => 'ids'
 	) );
-	$payments = $payments->get_payments();
+	$donations = $donations->get_payments();
 	$options  = array();
 
 	// Default option.
 	$options[0] = esc_html__( 'No donations found.', 'give' );
 
 	//Provide nice human readable options.
-	if ( $payments ) {
+	if ( $donations ) {
 		$options[0] = esc_html__( '- Select a donation -', 'give' );
-		foreach ( $payments as $payment ) {
+		foreach ( $donations as $donation_id ) {
 
-			$options[ $payment->ID ] = esc_html( '#' . $payment->ID . ' - ' . $payment->email . ' - ' . $payment->form_title );
-
+			$options[ $donation_id ] = sprintf(
+				'#%1$s - %2$s - %3$s',
+				$donation_id,
+				give_get_donation_donor_email( $donation_id ),
+				get_the_title( $donation_id )
+			);
 		}
 	}
 

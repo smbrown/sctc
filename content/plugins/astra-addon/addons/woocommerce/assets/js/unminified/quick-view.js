@@ -122,10 +122,18 @@ jQuery(document).ready(function($){
 			
 			ast_qv_modal.removeClass('loading').addClass('open');
 
+			var modal_height = ast_qv_modal.find( '#ast-quick-view-content' ).outerHeight();
+			var window_height = $(window).height();
 			var scrollbar_width = ast_get_scrollbar_width();
 			var $html = $('html');
 
-			$html.css( 'margin-right', scrollbar_width );
+			if( modal_height > window_height ) {
+				$html.css( 'margin-right', scrollbar_width );
+			} else {
+				$html.css( 'margin-right', '' );
+				$html.find( '.ast-sticky-active, .ast-header-sticky-active, .ast-custom-footer' ).css( 'max-width', '100%' );
+			}
+
 			$html.addClass('ast-quick-view-is-open');
 		}
 
@@ -199,83 +207,6 @@ jQuery(document).ready(function($){
 		return (w1 - w2); 
 	}
 
-	/* Add to cart ajax */
-	/**
-	 * ast_add_to_cart_ajax class.
-	 */
-	var ast_add_to_cart_ajax = function() {
-		$( document.body )
-			.on( 'click', '#ast-quick-view-content .single_add_to_cart_button', this.onAddToCart )
-			.on( 'added_to_cart', this.updateButton );
-	};
-	
-	/**
-	 * Handle the add to cart event.
-	 */
-	ast_add_to_cart_ajax.prototype.onAddToCart = function( e ) {
-
-		e.preventDefault();
-
-		var $thisbutton = $( this ),
-			product_id = $(this).val(),
-			variation_id = $('input[name="variation_id"]').val() || '',
-			quantity = $('input[name="quantity"]').val();
-
-		if ( $thisbutton.is( '.single_add_to_cart_button' ) ) {
-
-			$thisbutton.removeClass( 'added' );
-			$thisbutton.addClass( 'loading' );
-
-			// Ajax action.
-			if ( variation_id != '') {
-				jQuery.ajax ({
-					url: astra.ajax_url,
-					type:'POST',
-					data:'action=astra_add_cart_single_product&product_id=' + product_id + '&variation_id=' + variation_id + '&quantity=' + quantity,
-
-					success:function(results) {
-						// Trigger event so themes can refresh other areas.
-						$( document.body ).trigger( 'wc_fragment_refresh' );
-						$( document.body ).trigger( 'added_to_cart', [ $thisbutton ] );
-					}
-				});
-			} else {
-				jQuery.ajax ({
-					url: astra.ajax_url,
-					type:'POST',
-					data:'action=astra_add_cart_single_product&product_id=' + product_id + '&quantity=' + quantity,
-
-					success:function(results) {
-						// Trigger event so themes can refresh other areas.
-						$( document.body ).trigger( 'wc_fragment_refresh' );
-						$( document.body ).trigger( 'added_to_cart', [ $thisbutton ] );
-					}
-				});
-			}
-		}
-	};
-
-	/**
-	 * Update cart page elements after add to cart events.
-	 */
-	ast_add_to_cart_ajax.prototype.updateButton = function( e, button ) {
-		button = typeof button === 'undefined' ? false : button;
-
-		if ( $(button) ) {
-			$(button).removeClass( 'loading' );
-			$(button).addClass( 'added' );
-
-			// View cart text.
-			if ( ! astra.is_cart && $(button).parent().find( '.added_to_cart' ).length === 0  && astra.is_single_product) {
-				$(button).after( ' <a href="' + astra.cart_url + '" class="added_to_cart wc-forward" title="' +
-					astra.view_cart + '">' + astra.view_cart + '</a>' );
-			}
-
-
-		}
-	};
-
-
 	window.addEventListener("resize", function(event) {
 		ast_update_summary_height();
 	});
@@ -285,8 +216,4 @@ jQuery(document).ready(function($){
 	ast_qv_close_modal();
 	ast_update_summary_height();
 
-	/**
-	 * Init ast_add_to_cart_ajax.
-	 */
-	new ast_add_to_cart_ajax();
 });

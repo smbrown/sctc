@@ -42,6 +42,26 @@ if ( ! class_exists( 'Astra_Ext_Woocommerce_Loader' ) ) {
 			add_action( 'customize_controls_enqueue_scripts', array( $this, 'controls_scripts' ), 9 );
 
 			add_filter( 'astra_woo_shop_hover_style', array( $this, 'woo_shop_hover_style_callback' ) );
+
+			add_filter( 'wc_add_to_cart_message_html', array( $this, 'disable_woo_cart_msg' ), 10, 2 );
+		}
+
+		/**
+		 * Disable add to cart messages for AJAX request.
+		 *
+		 * @since 1.1.0
+		 * @param  string $message add to cart message.
+		 * @param  int    $product_id product ID.
+		 * @return string
+		 */
+		public function disable_woo_cart_msg( $message, $product_id ) {
+			$is_ajax_add_to_cart = astra_get_option( 'single-product-ajax-add-to-cart' );
+
+			if ( wp_doing_ajax() && '1' == $is_ajax_add_to_cart ) {
+				return null;
+			}
+
+			return $message;
 		}
 
 		/**

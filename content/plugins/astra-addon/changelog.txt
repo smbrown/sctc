@@ -1,3 +1,25 @@
+v1.3.4
+- Fix: Masonry effect not working in Blog Pro.
+
+v1.3.3
+- Improvement: Add Astra Pro fields in the LifterLMS Course builder.
+- Improvement: Quick View gallery now support image variation images.
+- Improvement: Headers created using custom layouts work correctly with transparent headers.
+- Improvement: Target Rule now allow targeting WooCommerce shop page.
+- Improvement: Target Rule now allows targeting all the posts inside a taxonomy/term.
+- Improvement: Added newly introduced actions in Custom Layouts addon.
+- Improvement: Updated logic for Ajax add to cart to add better support for third-party WooCommercce plugins.
+- Improvement: Set default background color for page headers with 0.5 so that the background image is visible by default.
+- Improvement: Custom Layouts addon now supports Divi Builder.
+- Improvement: Change read time string to be gramatically correct.
+- Fix: Page Headers not displayed correctly when in customizer.
+- Fix: Ajax add to cart not displaying variation names in some cases.
+- Fix: Custom Layouts + Thrive Page builder fixes.
+- Fix: When WooCommerce cart is used in header layout 2. Menu is misaligned on safari 10
+- Fix: Sticky header is not working as expected with padded layout.
+- Fix: Quick View popup adds space for header, above header.
+- Fix: Enable cursor for the Quick View background.
+
 v1.3.2
 - Fix: Custom layout not saving values for "Sticky: Desktop + Mobile".
 - Fix: Background color not working for the sticky header.
